@@ -1,4 +1,4 @@
-from api import cdn, ecdn, qssl, tools, teo
+from api import cdn, ecdn, qssl, tools, teo, live
 import config
 
 
@@ -183,6 +183,16 @@ def run_config_teo(id, key, zoneid, host, cert_id):
     # generate_https(https)
     teo.update_teo_ssl(teo_client, zoneid, host, cert_id)
 
+def run_config_live(id, key, domain, cert_id):
+    '''该函数实现为云直播域名证书更新ssl证书的功能
+    '''
+    live_client = live.get_live_client_instance(id, key)
+    lives = live.get_live_detail_info(live_client)
+    print('lives信息:')
+    print(lives)
+    live.update_live_ssl(live_client, domain, cert_id)
+
+
 def process_domain_config(secret_id, secret_key, domain, cert_id):
     '''
     配置域名的CDN、EO、SSL、URL刷新等功能
@@ -200,6 +210,8 @@ def process_domain_config(secret_id, secret_key, domain, cert_id):
         run_purge_url(secret_id, secret_key, domain, config.URLS_FILE)
     if config.ZONE_ID:
         run_config_teo(secret_id, secret_key, config.ZONE_ID, domain, cert_id)
+    if config.UPDATE_LIVE_SSL:
+        run_config_live(secret_id, secret_key, domain, cert_id)
 
 def get_cdn_domains(secret_id, secret_key, cert_id):
     '''

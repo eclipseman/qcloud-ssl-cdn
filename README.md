@@ -4,6 +4,7 @@
 * [CDN服务](https://console.cloud.tencent.com/cdn)：为CDN服务更换指定id的SSL证书；根据网址，批量预热URL
 * [ECDN服务](https://console.cloud.tencent.com/ecdn)：为ECDN服务更换指定id的SSL证书
 * [EO平台](https://console.cloud.tencent.com/edgeone)：为边缘安全加速平台更换指定id的SSL证书
+* [LIVE平台](https://console.cloud.tencent.com/live)：为云直播平台更换指定id的SSL证书
 
 目的：
 * 把利用[acme.sh](https://github.com/acmesh-official/acme.sh)申请的`Let's Encrypt`证书上传到腾讯云
@@ -55,6 +56,7 @@ docker run -d \
 * `UPDATE_SSL`: 是否进行为CDN_DOMAIN更换SSL证书的操作，默认为`True`
 * `PUSH_URLS`: 是否进行预热URL的操作，默认为`True`
 * `PURGE_URL`: 是否进行刷新URL的操作，默认为`True`
+* `UPDATE_LIVE_SSL`: 是否进行为云直播更换SSL证书的操作，默认为`True`
 
 
 
@@ -109,3 +111,6 @@ acme.sh --issue  -d "whuzfb.cn" -d "*.whuzfb.cn" --dns dns_dp
 `teo.get_teo_zones_list(client)`：获取边缘安全加速平台所有的加速区域`zoneID`列表
 `teo.get_teo_domains_list(client, zone_id)`：获取指定加速区域的域名列表
 `teo.update_teo_ssl(client, zoneid, hostname, cert_id)`：为指定域名的加速区域的对应域名更换SSL证书
+
+`live.get_live_detail_info(client)`：获取所有LIVE的详细信息，返回列表
+`live.update_live_ssl(client, domain, cert_id)`：为指定域名的LIVE更换SSL证书

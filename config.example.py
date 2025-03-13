@@ -43,6 +43,11 @@ DELETE_OLD_CERTS = True
 # 是否进行为CDN_DOMAIN更换SSL证书的操作
 # 若UPDATE_SSL = True且UPLOAD_SSL = True，则CERT_ID可不设置，直接利用UPLOAD_SSL的证书
 UPDATE_SSL = True
+
+# 是否为腾讯云直播域名更换SSL证书的操作
+# 若UPDATE_LIVE_SSL = True 注意请将UPDATE_SSL、ENABLE_HSTS、ENABLE_OCSP、ENABLE_HTTP2 设置为 False
+UPDATE_LIVE_SSL = True
+
 CERT_ID = ""
 # 是否进行预热URL的操作
 PUSH_URL = True

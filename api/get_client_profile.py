@@ -11,6 +11,8 @@ from tencentcloud.cdn.v20180606 import cdn_client
 from tencentcloud.ecdn.v20191012 import ecdn_client
 # 导入eo产品模块的 client
 from tencentcloud.teo.v20220901 import teo_client
+# 导入live产品模块的 client
+from tencentcloud.live.v20180801 import live_client
 
 def get_client_instance(id, key, product):
     '''获取指定endpoint的实例，用于后面对其的各种操作
@@ -44,8 +46,11 @@ def get_client_instance(id, key, product):
         elif product == "teo":
             client = teo_client.TeoClient(cred, "", clientProfile)
             print("实例化teo client成功")
+        elif product == "live":
+            client = live_client.LiveClient(cred, "", clientProfile)
+            print("实例化live client成功")
         else:
-            exit("本程序仅支持ssl、cdn、ecdn、teo")
+            exit("本程序仅支持ssl、cdn、ecdn、teo、live")
         return client
     except TencentCloudSDKException as err:
         print(err)
